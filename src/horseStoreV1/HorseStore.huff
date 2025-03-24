@@ -1,0 +1,52 @@
+//  send calldata -> function dispatch -> function
+//  60008060093d393df3 -<contract creation bytecode>
+
+// 0xe026c017 -> f_selector of readNumberOfHorses
+// 0xcdfead2e -> f_selector of updateHorseNumber()
+
+// Interface
+#define function updateHorseNumber(uint256) nonpayable returns()
+#define function readNumberOfHorses() view returns(uint256)
+
+ #define macro MAIN()= takes(0) returns(0) {
+    // 0x00 //[0]
+    // 0x02 // TOP [2,0] BOTTOM
+    // 0x0102 >> 4 = 16
+    0x00
+
+    calldataload // 32 bytes
+    // we have to shift the value to the right by 28 bytes [224 bits] becoz we need only starting 4 bytes of the beginning
+
+    0xE0 // converting 224 decimal or 28 bytes to hex to push in stack
+
+    //  [0Xe0, calldataLoad] -> 0Xe0 << 224 | calldataLoad
+    shr //shifts second last entry to the right by the last entry i.e. 224 bits (or 0xe0 hex) [ function_selector]
+
+    //updateHorses f_selector
+    dup1 //[function_selector, function_selector]
+    __FUNC_SIG(updateHorseNumber)   //[0xcdfead2e, functionSelector, function_selector] 
+
+    eq //true if function selector matches [true_if_func_selector_matches, function_selector]
+
+    // jump to update horse number code if true
+    updateJump //[updateHorseNumberProgramCounter, true/false]
+    jumpi            // [function_selector]
+
+    __FUNC_SIG(readNumberOfHorses) //[0xe026c017, function_selector]
+    eq  
+    readJump //[true_if_func_selector_matches]
+    jumpi // []
+
+    0x00 0x00 revert //if we do not get a valid function selector
+
+    updateJump:
+        SET_NUMBER_OF_HORSES()
+
+    readJump:
+        GET_NUMBER_OF_HORSES()
+ } 
+
+ #define macro SET_NUMBER_OF_HORSES() = takes(0) returns(0) {}
+
+ #define macro GET_NUMBER_OF_HORSES() = takes(0) returns(0) {}
+
