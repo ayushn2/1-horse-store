@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.29;
 
-import {Base_TestV1, HorseStore} from "./Base_TestV1.t.sol";
+import {Base_TestV1, IHorseStore} from "./Base_TestV1.t.sol";
 import {HuffDeployer} from "foundry-huff/HuffDeployer.sol";
 
 contract HorseSolc is Base_TestV1 {
@@ -10,6 +10,6 @@ contract HorseSolc is Base_TestV1 {
 
     function setUp() public override {
         // horseStore = // Huff Edition;
-        horseStore = HorseStore(HuffDeployer.config().deploy(HORSE_STORE_HUFF_LOCATION));
+        horseStore = IHorseStore(HuffDeployer.config().deploy(HORSE_STORE_HUFF_LOCATION));
     }
 }
