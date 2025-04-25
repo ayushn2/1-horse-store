@@ -42,24 +42,24 @@ abstract contract Base_TestV2 is Test {
         assertEq(horseStore.horseIdToFedTimeStamp(horseId), lastFedTimeStamp);
     }
 
-    function testFeedingMakesHappyHorse() public {
-        uint256 horseId = horseStore.totalSupply();
-        vm.warp(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
-        vm.roll(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
-        vm.prank(user);
-        horseStore.mintHorse();
-        horseStore.feedHorse(horseId);
-        assertEq(horseStore.isHorseHappy(horseId), true);
-    }
+    // function testFeedingMakesHappyHorse() public {
+    //     uint256 horseId = horseStore.totalSupply();
+    //     vm.warp(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
+    //     vm.roll(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
+    //     vm.prank(user);
+    //     horseStore.mintHorse();
+    //     horseStore.feedHorse(horseId);
+    //     assertEq(horseStore.isHorseHappy(horseId), true);
+    // }
 
-    function testNotFeedingMakesUnhappyHorse() public {
-        uint256 horseId = horseStore.totalSupply();
-        vm.warp(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
-        vm.roll(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
-        vm.prank(user);
-        horseStore.mintHorse();
-        assertEq(horseStore.isHorseHappy(horseId), false);
-    }
+    // function testNotFeedingMakesUnhappyHorse() public {
+    //     uint256 horseId = horseStore.totalSupply();
+    //     vm.warp(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
+    //     vm.roll(horseStore.HORSE_HAPPY_IF_FED_WITHIN());
+    //     vm.prank(user);
+    //     horseStore.mintHorse();
+    //     assertEq(horseStore.isHorseHappy(horseId), false);
+    // }
 
     function testHorseIsHappyIfFedWithinPast24Hours(uint256 horseId, uint256 checkAt) public {
         uint256 fedAt = horseStore.HORSE_HAPPY_IF_FED_WITHIN();

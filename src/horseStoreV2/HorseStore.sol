@@ -5,7 +5,7 @@ import {ERC721Enumerable, ERC721} from "@openzeppelin/contracts/token/ERC721/ext
 import {IHorseStore} from "./IHorseStore.sol";
 
 contract HorseStore is IHorseStore, ERC721Enumerable{
-    string constant NFT_NAME = "Horse";
+    string constant NFT_NAME = "HorseStore";
     string constant NFT_SYMBOL = "HRS";
     uint256 public constant HORSE_HAPPY_IF_FED_WITHIN = 1 days;
 
