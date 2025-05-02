@@ -14,7 +14,7 @@ abstract contract Base_TestV2 is Test {
         horseStore = new HorseStore();
     }
 
-    function testName() public {
+    function testName() public view {
         string memory name = horseStore.name();
         assertEq(name, NFT_NAME);
     }
