@@ -12,5 +12,5 @@ interface IHorseStore is IERC721Enumerable {
 
     function feedHorse(uint256 horseId) external;
 
-    function isHorseHappy(uint256 horseId) external view returns (bool);
+    function isHappyHorse(uint256 horseId) external view returns (bool);
 }

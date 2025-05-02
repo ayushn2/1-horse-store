@@ -35,7 +35,6 @@ abstract contract Base_TestV2 is Test {
         vm.roll(10);
         vm.prank(user);
         horseStore.mintHorse();
-
         uint256 lastFedTimeStamp = block.timestamp;
         horseStore.feedHorse(horseId);
 
@@ -68,7 +67,7 @@ abstract contract Base_TestV2 is Test {
         horseStore.feedHorse(horseId);
 
         vm.warp(checkAt);
-        assertEq(horseStore.isHorseHappy(horseId), true);
+        assertEq(horseStore.isHappyHorse(horseId), true);
     }
 
     /*//////////////////////////////////////////////////////////////
